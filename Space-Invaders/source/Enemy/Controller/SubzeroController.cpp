@@ -47,5 +47,18 @@ namespace Enemy
 			ServiceLocator::getInstance()->getPlayerService()->increaseScore(reward);
 			EnemyController::processScore();
 		}
+		void SubzeroController::fireFrostBeam()
+		{
+		  FrostBeam* frost_beam = new FrostBeam();
+		  frost_beam->initialize(enemy_model->getEnemyPosition());	 
+		}
+		void subzeroController::update()
+		{
+			 EnemyController::update();
+			 if(enemy_model->getEnemyState() == EnemyState::ALIVE)
+			 {
+				 fireFrostBeam();
+			 }
+		}
 	}
 }

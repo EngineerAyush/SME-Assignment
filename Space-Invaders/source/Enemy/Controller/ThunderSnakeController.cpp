@@ -115,5 +115,20 @@ namespace Enemy
 			ServiceLocator::getInstance()->getPlayerService()->increaseScore(reward);
 			EnemyController::processScore();
 		}
+		
+ 		void ThunderSnakeController::fireTorpedoes()
+		{
+			Torpedo* torpedo = new Torpedo();
+			torpedo->initialize(enemy_model->getEnemyPosition());
+			torpedo->setPosition(enemy_model->getEnemyPosition());
+		}
+		void ThunderSnakeController:: update()
+		{
+			EnemyController::update();
+			if (enemy_model->getEnemyState() == EnemyState::ALIVE)
+			{
+				fireTorpedoes();
+			}
+		}
 	}
 }

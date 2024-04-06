@@ -82,5 +82,21 @@ namespace Enemy
 			ServiceLocator::getInstance()->getPlayerService()->increaseScore(reward);
 			EnemyController::processScore();
 		}
+ 		void ZapperController::fireLockedMissiles()
+		{
+			LockedMissile* locked_missile = new LockedMissile();
+			locked_missile->initialize(enemy_model->getEnemyPosition());
+			lockedMissile->setPosition(this->position);
+			lockedMissile->setTarget(ServiceLocator::getInstance()->getPlayerService()->getPlayerPosition());
+		}
+		void ZapperController::update()
+		{
+			EnemyController::update();
+			if (enemy_model->getEnemyState() == EnemyState::ALIVE)
+			{
+				fireLockedMissiles();
+			}
+
+		}
 	}
 }

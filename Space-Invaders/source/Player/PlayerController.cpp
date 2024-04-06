@@ -9,7 +9,9 @@
 #include "../../header/Sound/SoundService.h"
 #include "../../header/Main/GameService.h"
 #include "../../header/Gameplay/HighScore.h"
-
+#include <PlayerController.h>
+using namespace Player::PlayerController;
+//Currently neither the player ship nor enemy ships can fire bullets. Change the code so that thre player ship are able to fire the bullets.
 namespace Player
 {
 	using namespace Global;
@@ -189,6 +191,31 @@ namespace Player
 		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::POWERUP_DISABLED);
 		player_model->setTrippleFireState(false);
 	}
+	void PlayerController::processBulletFire()
+	{
+		PlayerModel* getPlayerModel(); // Add this line to declare the "getPlayerModel" function
+       
+		if (player_model->isTrippleFireEnabled())
+		{
+			fireTrippleBullet();
+		}
+		else
+		{
+			Player::PlayerController::fireBullet();
+		}
+		 
+	}
+
+	void PlayerController::fireBullet()
+	{
+		// Implementation of the fireBullet function
+		if (elapsed_bullet_cooldown <= 0)
+		{
+			ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::PLAYER_FIRE);
+			player_model->fireBullet();
+			elapsed_bullet_cooldown = player_model->bullet_cooldown;
+		}
+	}
 
 	void PlayerController::processPlayerInput()
 	{
@@ -200,8 +227,9 @@ namespace Player
 		if (event_service->pressedRightArrowKey() || event_service->pressedDKey()) 
 			moveRight();
 
-		//if (event_service->pressedLeftMouseButton()) 
-		//	processBulletFire();
+		if (event_service->pressedLeftMouseButton()) 
+			processBulletFire();
+
 	}
 
 	void PlayerController::moveLeft()

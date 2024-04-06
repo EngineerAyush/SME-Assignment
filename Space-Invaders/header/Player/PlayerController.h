@@ -34,6 +34,10 @@ namespace Player
         void disableRapidFire();    
         void disableTrippleLaser();
 
+        void processBulletFire();
+
+        void fireBullet();
+
         void saveHighScore();
 
     public:
