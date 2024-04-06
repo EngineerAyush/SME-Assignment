@@ -18,8 +18,12 @@ Adding Weaponry (1 hour)
 
 Now that everything's shipshape, let's give our player some serious firepower!
 
-Fire at Will!: In the PlayerController.cpp file, I found a function called processPlayerInput() that seemed perfect for handling player firing. I uncommented it and added a new function called processBulletFire() to make those bullets fly.
+Fire at Will!: In the PlayerController.cpp file, I found a function called processPlayerInput() & added a new function called processBulletFire() to make those bullets fire to the direction.
+
 Unique Arsenals: Each of our spaceships has their own special weapon:
+
 Subzero: This icy warrior can unleash a freezing frost beam with the fireFrostBeam() function. Brrr!
+
 ThunderSnake: This heavy hitter packs a punch with its fireTorpedoes function, launching powerful torpedoes that can even destroy bunkers!
+
 Zapper: This agile ship deploys heat-seeking missiles with the fireLockedMissiles() function that track down the player wherever they go!
